@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse BCK Digital Library resources by class and subject.">
+  <title>Digital Library | BCK</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header compact-header">
+    <div class="hero container">
+      <div class="badge-box small-badge"><img src="images/badge.png" alt="BCK school badge"></div>
+      <p class="eyebrow">BCK Digital Library</p>
+      <h1>Browse the shelves</h1>
+      <p class="tagline">Choose your class and open an approved resource.</p>
+    </div>
+    <nav class="navbar container" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a class="active" href="books.html">Digital Library</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="container library-main">
+    <section class="library-toolbar glass">
+      <div>
+        <span class="chip">LIBRARY CATALOGUE</span>
+        <h2 id="viewTitle">All resources</h2>
+        <p id="countLabel">Loading resources…</p>
+      </div>
+      <label class="search-box">
+        <span class="sr-only">Search resources</span>
+        <input id="searchInput" type="search" placeholder="Search title, subject or author…" autocomplete="off">
+      </label>
+    </section>
+
+    <div class="library-layout">
+      <aside class="class-filter glass" aria-label="Filter by class">
+        <h3>Classes</h3>
+        <button class="filter-btn active" data-class="ALL">All classes</button>
+        <button class="filter-btn" data-class="S1">S1 <span>O-Level</span></button>
+        <button class="filter-btn" data-class="S2">S2 <span>O-Level</span></button>
+        <button class="filter-btn" data-class="S3">S3 <span>O-Level</span></button>
+        <button class="filter-btn" data-class="S4">S4 <span>O-Level</span></button>
+        <button class="filter-btn" data-class="S5">S5 <span>A-Level</span></button>
+        <button class="filter-btn" data-class="S6">S6 <span>A-Level</span></button>
+        <hr>
+        <a class="text-link" href="index.html">← Back home</a>
+      </aside>
+
+      <section id="resourceGrid" class="resource-grid" aria-live="polite"></section>
+    </div>
+  </main>
+
+  <footer class="site-footer container">BCK Digital Library · Google Drive resources imported</footer>
+
+  <script>
+    /*
+      HOW TO ADD A RESOURCE:
+      1. Upload the approved file to Google Drive.
+      2. Set sharing to the correct school-approved viewer access.
+      3. Copy its link and replace url: '#DRIVE_LINK_GOES_HERE'.
+      4. Keep the link inside quotation marks.
+
+      You can duplicate any object below. The first 12 entries are examples.
+    */
+    const BOOKS = [
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 001', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1-1advC0Wj2Eu7-yCqp2gU99QVVBtoTZi/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 002', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1-4gwOPfoxMFFPeeuYp1-tiy_OVKD7-_M/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 003', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1-IlQcku3EJt2kOH5NHkSufzGMreVfx78/view?usp=drive_link' },
+      { cls:'ALL', subject:'School document', title:'Shared Drive Resource 004', author:'BCK Digital Library', format:'GOOGLE DOC', url:'https://docs.google.com/document/d/107gC_VIikV9d8xh52aTfFQayUA9Yl5QH/edit?usp=drive_link&ouid=113405992284039383533&rtpof=true&sd=true' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 005', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/10H4why5rwfUpTnP8ZrVFgVQCe_LIDRBO/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 006', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/10KPN7XhzDTN8KVf0wKpsJU3MmalTUVpg/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 007', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/11TwrfvtWVGlRLgBFge5oBdEEU75Jzzx8/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 008', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/11UJNZvfd8d08avReCgwqyLqqgxA71OnW/view?usp=drive_link' },
+      { cls:'ALL', subject:'School document', title:'Shared Drive Resource 009', author:'BCK Digital Library', format:'GOOGLE DOC', url:'https://docs.google.com/document/d/11iuMg8maV9l4ObaAilfbp4hcxkLgKH12/edit?usp=drive_link&ouid=113405992284039383533&rtpof=true&sd=true' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 010', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/12awAEP9EI9RNnO2OM6RrKCyDwMfDMoDR/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 011', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/13j2RZ2SCk1-01pdaVkitz5jm2KJhwXfa/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 012', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/145XPTUN9Ls5-HfAwMKZvPfW8b-x1jicT/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 013', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/15BNxh4NfX6moqjZD_b8qbkJgt_o_Q-QZ/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 014', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/15QJrP5TUkOPBG4BcSCfVN4aZS1LjDmfH/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 015', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/15_WUQVAyVgTdwBzFdui-4HAMrMFE0fjI/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 016', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/15gOqCMnNhPl_P9pxatKweCidiD8J2zis/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 017', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/16W5l-G1BXaL95vQP_1nqAGMmt5X8hiZd/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 018', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/16_GWb1_ufuUIbRxJk_KXFxYSL0P7_XJ_/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 019', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/17P9_Rs1jgKXwBUv-o0wqT2SzJRR69Gqr/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 020', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/17eBvg1P_3pY1ymZWX_YLzfSrP-2Pa9Sw/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 021', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/17mPSKGdDdd0Ejo_jqcuIZ8ct66banZ7n/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 022', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/17wz37BjjQWfE7czxpCBoan5fo_DFTx10/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 023', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1825DzduVe8lAXB9WEzuSlT6Cu01T9TPA/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 024', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/18HwQLNhlCP7M1HrnMiCTnJwf7i976sD6/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 025', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/18Tdhr8USC88ZpGzU4s2mjbYUj5wEteYM/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 026', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/18xSNdY9PYFuP9D9t0Ox1-FxQ68GcPrqv/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 027', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/19iRwbx8nX2-Cnbz5-Zhg-NkO32DA-Xvv/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 028', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1AV7W7_XYT38MwvutNcy0eVGc-hTgTa1o/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 029', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1AdXKMMi3a0_2NpAu8izgpz-qRzfsdLwH/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 030', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1ArapfXx4yXy_RPTSNLdJxfs4jMAxVXw6/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 031', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1As-9luA-kCeGUS3Bp9ElG2qkynNzWVlr/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 032', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1D5-7x8H2KKlgwh-o0tqtHecUW4xhypaa/view?usp=drive_link' },
+      { cls:'ALL', subject:'School document', title:'Shared Drive Resource 033', author:'BCK Digital Library', format:'GOOGLE DOC', url:'https://docs.google.com/document/d/1EH_S5CG03aPZ_drL4FnhBRL3sHrxREK1/edit?usp=drive_link&ouid=113405992284039383533&rtpof=true&sd=true' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 034', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1EPhVra-cEWkBpWuZzbIL87hXakH-VLI1/view?usp=drive_link' },
+      { cls:'ALL', subject:'School document', title:'Shared Drive Resource 035', author:'BCK Digital Library', format:'GOOGLE DOC', url:'https://docs.google.com/document/d/1FT-42JQkBIqxNu2RqGwCQqsgHe6nH_UV/edit?usp=drive_link&ouid=113405992284039383533&rtpof=true&sd=true' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 036', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1HMVuOOpje6L8WSlo8SxtM8pQ5x2mReX7/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 037', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1I6Bae2jUfdXkcSvPDma_fCQ6Duffs4ss/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 038', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1Jc5VPKCl3EqgtBR5Jb1e-FPKsRUMtfuJ/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 039', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1KUlCOIPF5Q1RzUnTOBJYTE7GLgwvf0q3/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 040', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1LeX3kguiM-PSKUjeOOwdyl54u8CAfAej/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 041', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1LwbQ55o2YPVV1tvo9CKpYgpnc47dx02V/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 042', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1MCGJ5KuBFbibYIt4Wj960e2OD-PH243l/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 043', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1MFdIpS4QavhMoGJ58_R5FM_a3yO-M0FX/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 044', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1MpwTcDrTFe1aWIPm-n557VuPDLVXp86H/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 045', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1NPY2m94v7UUsZYmLm5SVLhsQ611eUXvi/view?usp=drive_link' },
+      { cls:'ALL', subject:'Geography / Maps', title:'Shared Drive Resource 046', author:'BCK Digital Library', format:'GOOGLE EARTH', url:'https://earth.google.com/earth/d/1NeqMIWp7vJawDP7DOp90WfuP7P8oYCxl?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 047', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1NqS3k2VRM4ZV3zVZU8_9qj4aZf7OCums/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 048', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1O4f1PrF7-srL65aPx-grMa7HXFnF72gd/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 049', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1OHm-UvBoJ_3b8ScePIEqO_wSQJBZEods/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 050', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1OpuxWxG50l7e-U2w-7XohY3EwkCKoxak/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 051', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1Os01wuUbtVq-LbGmFATJJApL9Ojte-VJ/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 052', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1PLiBn0idV3ODH_p-_W1qZQgTOoAuJz65/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 053', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1Pk7iiydAD5BD4NZ4GNK-HVc2J2EamPRm/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 054', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1Po5zLIXkKmy1mL9nji8Fljo69tJSSEKj/view?usp=drive_link' },
+      { cls:'ALL', subject:'School document', title:'Shared Drive Resource 055', author:'BCK Digital Library', format:'GOOGLE DOC', url:'https://docs.google.com/document/d/1Q0NJ3iVQmWmP0vu4pQdlsF9BaRBmQ13a/edit?usp=drive_link&ouid=113405992284039383533&rtpof=true&sd=true' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 056', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1RwelHG7zjs9VH7QF0sDMbkrWRUcYv7Ar/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 057', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1SAD3yR0BGNltDkQIDQLC8kdpidGQjbDK/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 058', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1SomIngb7FEcAfMT4R_SNVXoGzywa53_p/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 059', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1TTMTAQsUoiWECYSrP3k49jZLZe_wkg8G/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 060', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1TwVUgw5MwUcv14CcxTNHDfgQk1QGlVnE/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 061', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1UBzSf4qk1pSVWzmI6_lYxGQPiklmb1ye/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 062', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1Up-ZX5cQOZ8oYkoqyHVnpia8BIf-1IxR/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 063', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1Utdh9zmB_gUfnYD1pNQvfGlUjuT6Ikhh/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 064', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1UyNqMJQAU6rL__C4D5P859DdOa-b0RhG/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 065', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1VMXVhz0pHTP65by3gMoREggRvpApMcaG/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 066', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1VeqhWtvMFJ1J0sCFe7MSNszy96mHytv3/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 067', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1WSR9Q2ExUpu9DOqQ4ifMmu4F2dksMNK9/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 068', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1XGgxz0ijDpbqwrGKTmCGwXJDvTmXBgN9/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 069', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1Z26O0U8NBku2WxuDHbR50rktqvrF5ElF/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 070', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1_VjHy6wB2_GHtiNv4sZl9-jqAaU6CwtX/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 071', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1_csgRjAhUfVfc5D-k5iFULpseQL2r3Hb/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 072', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1_ynE46a1R6kgEzgwerNE5wj9aylvJJwl/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 073', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1bBj759czZb6JCAZLmQgXOzRil6xqHeq4/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 074', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1bDTwbsG0X1pEc0TqeXsMv7ZpA_4qIRc2/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 075', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1bYM0ujSiwEb6ZJrIdmenVQjiUUJAcDWe/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 076', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1bkdzP5CEMKtKZa18OB55uTBaeorvNMqh/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 077', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1bkrNSo_s9o16IF4GcGpKDkFNwmaCisa6/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 078', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1bmtzFQdigpyXRx-5_ZfMx4i1Ai4R1QbU/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 079', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1cNaA16n3KdG3_ikukyrij8Xw9Pt8W3Uj/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 080', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1e8TADvhKixD32ifULZb7o28CIiStKiAb/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 081', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1eRdnR1SFjFRjgQpwDRgD9HRdL5zHtKNi/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 082', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1fBZlj2WYbF6NivzRhvc0xr_HwWBRkFqU/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 083', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1gF3PCR6G0dayZP6PLiL3XAwOl2Wi5Qv9/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 084', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1ggZFbgrvNhytaWOwyK-H0SNbVvgvxZsd/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 085', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1hk7mcqpiIQSC61fkFT3XUBoSuH6PP5dd/view?usp=drive_link' },
+      { cls:'ALL', subject:'School document', title:'Shared Drive Resource 086', author:'BCK Digital Library', format:'GOOGLE DOC', url:'https://docs.google.com/document/d/1i2yTRiaqbGjsmLz3h5fLLAn1RELqmAJ0u6xfkhzVyOc/edit?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 087', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1iFdS82N0TII8Yo-3cWLupcIFdlTSbnf2/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 088', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1iYS7Nn2qh-GPIF8-OM48LlbRceYoI7Tg/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 089', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1iix5d7hXuBm7nhSCDgtQi5weJYyIGfNQ/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 090', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1ij8_z8edebecZC6sGzW3BjnApamYuVP-/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 091', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1jBX1PV8Nl-xzKK7aSmYY6SlTZQnLNjI_/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 092', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1jrC5YP7aKud5A5FOWguqUR71mS3N8mA8/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 093', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1juB2vHy7KwRWUgkxtpL9XbQfmT3vfin5/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 094', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1kRb3arMWYXLo_Lhi7U_Km8X2yg4RWqh-/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 095', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1l5HC682v0pdPtgTyKj3rvMDnJRdrHoJr/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 096', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1l8JLyTuuNizi7aOAj6txgITzdiowz6pF/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 097', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1l_KTKkb_ydmQwPcOF5q73KrDk1bI4JSK/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 098', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1lfluHhgqOoQXFbdh9aExlY7WgJFNrOh0/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 099', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1lw1cWYFGAQOj4KhJVaBQo8eGQ6tNujId/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 100', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1mUE6kHbGEln0jQTayoh7XJhg15f5HS_l/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 101', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1mag39hhCcPWaqmFT7GV4k_pzdLfvCfjW/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 102', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1mfFZlMQ3Qkgf3yaNVXFJtmO3IMpohhtF/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 103', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1mnqiIBf9FPmHN61VCy240rCP-Ev4PUuE/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 104', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1n3nquDbWm5F1h2Yb5NIOlNIwLAh7FZhS/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 105', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1nHvKmD1V3JOXdDMRI0dx6r4uE5Zd47fq/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 106', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1nQuqyWvTgiZt6m_oN-9jXQCRsMch7Pjn/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 107', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1oq9OMdDH3mzlp0uTocuEmKxVa_u28Tk5/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 108', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1pC6W2bFIMsBI76N6RHlH_nAzAX3WyHyv/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 109', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1qJ_H1XoXDVwyXFDtX8EpHahfViCEQm9n/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 110', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1rNQ0aQW0CHcAkmN5XhvPZqj1uUxJAXhJ/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 111', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1sb7DVj2J2nTokjeM3L6aMzS4HTS9KGDX/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 112', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1shsu3iKASQuLUArkIYWQZrV82LOndbJv/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 113', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1suxQRMSbk67mCxCJ4L2HoLiTTcQ7dueP/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 114', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1t3P-YKzRxSpV401nBhhbKlYbTDzods7s/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 115', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1tFuFB_3591nw5WG38UObhitTwjtvx5Kw/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 116', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1tJt4Bp0gzFoEJfRj-LNznQTIWwPhRL-3/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 117', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1tmZ5vomGRiWW_NdzQlGGvUxthqu3gCyH/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 118', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1uJ1p6xkQd9WirEoGQAQUM3gjzEcgUgYm/view?usp=drive_link' },
+      { cls:'ALL', subject:'School document', title:'Shared Drive Resource 119', author:'BCK Digital Library', format:'GOOGLE DOC', url:'https://docs.google.com/document/d/1uUlThK3EAUXk8qR5X4pI4VebHSlQnKRu/edit?usp=drive_link&ouid=113405992284039383533&rtpof=true&sd=true' },
+      { cls:'ALL', subject:'School document', title:'Shared Drive Resource 120', author:'BCK Digital Library', format:'GOOGLE DOC', url:'https://docs.google.com/document/d/1uYQl-6dVYjGaKC6nTNJhdnrumCNLhxXk/edit?usp=drive_link&ouid=113405992284039383533&rtpof=true&sd=true' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 121', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1umqHoiVDCk-0qtkmNKe3sM6EahS0n66V/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 122', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1vXu22UcIqqqdm04ptnIQvdDe2siNKK7M/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 123', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1wCIVgtdiX_I4cSQ9LDMWdbyuICESDh76/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 124', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1xGd2LbcTob0AiE6SAFE5P6AjOIdRDTgg/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 125', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1xKLn-MLvqYWH2NPwNPScLhl4anKzAZe6/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 126', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1xQAM1ygKEGsY0hrrdelOf9iqJ3sjDdbE/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 127', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1yHReS2oGFkLawj68GkHKnDNib33-zoXb/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 128', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1ybhefXZSCp8Ze3xl7wdT-3WXE6WmCUaw/view?usp=drive_link' },
+      { cls:'ALL', subject:'School resource', title:'Shared Drive Resource 129', author:'BCK Digital Library', format:'DRIVE FILE', url:'https://drive.google.com/file/d/1za2sw3_7phmsTBxUEsSLHo4DDawqJv9H/view?usp=drive_link' }
+    ];
+
+    const grid = document.getElementById('resourceGrid');
+    const search = document.getElementById('searchInput');
+    const title = document.getElementById('viewTitle');
+    const count = document.getElementById('countLabel');
+    let selectedClass = 'ALL';
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+    }
+
+    function draw() {
+      const term = search.value.trim().toLowerCase();
+      const filtered = BOOKS.filter(book => {
+        const matchesClass = selectedClass === 'ALL' || book.cls === selectedClass || book.cls === 'ALL';
+        const searchable = `${book.title} ${book.subject} ${book.author} ${book.format}`.toLowerCase();
+        return matchesClass && searchable.includes(term);
+      });
+      title.textContent = selectedClass === 'ALL' ? 'All resources' : `${selectedClass} library`;
+      count.textContent = `${filtered.length} resource${filtered.length === 1 ? '' : 's'} found`;
+      grid.innerHTML = filtered.length ? filtered.map(book => {
+        const ready = book.url && !book.url.includes('DRIVE_LINK_GOES_HERE');
+        return `<article class="resource-card glass">
+          <div class="resource-cover">📖</div>
+          <div class="resource-meta"><span class="chip">${escapeHTML(book.cls === 'ALL' ? 'ALL CLASSES' : book.cls)}</span><span class="format">${escapeHTML(book.format)}</span></div>
+          <h3>${escapeHTML(book.title)}</h3>
+          <p class="subject">${escapeHTML(book.subject)}</p>
+          <p class="author">${escapeHTML(book.author)}</p>
+          ${ready ? `<a class="btn-gold full-btn" href="${escapeHTML(book.url)}" target="_blank" rel="noopener">Open resource</a>` : `<span class="btn-disabled">Link not added yet</span>`}
+        </article>`;
+      }).join('') : '<div class="empty-state glass"><h3>No resources found</h3><p>Try another class or search term.</p></div>';
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(button => button.addEventListener('click', () => {
+      selectedClass = button.dataset.class;
+      document.querySelectorAll('.filter-btn').forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+      draw();
+    }));
+    search.addEventListener('input', draw);
+    const hashClass = location.hash.replace('#','').toUpperCase();
+    if (/^S[1-6]$/.test(hashClass)) {
+      selectedClass = hashClass;
+      const button = document.querySelector(`[data-class="${hashClass}"]`);
+      document.querySelectorAll('.filter-btn').forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+    }
+    draw();
+  </script>
+</body>
+</html>
