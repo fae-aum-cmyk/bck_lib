@@ -5,80 +5,790 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="About the BCK Digital Library, developed by the ICT Club in collaboration with the Prefectorial Education Department.">
   <title>About the Project | BCK Digital Library</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" type="image/png" href="images/badge.png">
+  <link rel="icon" type="image/png" href="images/school-badge.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @keyframes auroraShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(3deg); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 200, 0.35), inset 0 0 20px rgba(0, 255, 200, 0.08); }
+      50% { box-shadow: 0 0 55px rgba(0, 255, 200, 0.6), inset 0 0 30px rgba(0, 255, 200, 0.15); }
+    }
+    @keyframes holoShimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+  </style>
 </head>
-<body>
-  <header class="site-header compact-header">
-    <div class="hero container">
-      <div class="badge-box small-badge"><img src="images/badge.png" alt="BCK school badge"></div>
-      <p class="eyebrow">ICT Club × Prefectorial Education Department</p>
-      <h1>About the project</h1>
-      <p class="tagline">Building better access to learning at BCK.</p>
+<body style="
+  margin: 0;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  color: #e8f1ff;
+  background: #05070f;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+">
+
+  <!-- Animated cosmic background (No more square grid!) -->
+  <div style="
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(120, 0, 255, 0.35), transparent 50%),
+      radial-gradient(circle at 80% 30%, rgba(0, 200, 255, 0.28), transparent 55%),
+      radial-gradient(circle at 50% 90%, rgba(255, 0, 180, 0.25), transparent 60%),
+      linear-gradient(135deg, #05070f 0%, #0a0d1f 50%, #050714 100%);
+    background-size: 200% 200%;
+    animation: auroraShift 18s ease-in-out infinite;
+    z-index: -2;
+  "></div>
+
+  <!-- Floating decorative orbs -->
+  <div style="position: fixed; top: 10%; left: 5%; width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle, #00ffd0, #0077ff 60%, transparent); filter: blur(30px); opacity: 0.7; animation: floaty 8s ease-in-out infinite; pointer-events: none;"></div>
+  <div style="position: fixed; top: 60%; right: 8%; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle, #ff00cc, #7700ff 60%, transparent); filter: blur(40px); opacity: 0.6; animation: floaty 10s ease-in-out infinite reverse; pointer-events: none;"></div>
+
+  <!-- ============ HEADER ============ -->
+  <header style="
+    position: relative;
+    padding: 80px 20px 40px;
+    text-align: center;
+    perspective: 1200px;
+  ">
+    <div style="
+      max-width: 1100px;
+      margin: 0 auto;
+      transform: translateZ(40px);
+    ">
+      <!-- Holographic Orb Badge -->
+      <div style="position: relative; display: inline-flex; margin-bottom: 24px; animation: floaty 7s ease-in-out infinite;">
+        <div style="
+          position: absolute; inset: -15px;
+          border: 2px dashed rgba(0,255,220,0.4);
+          border-radius: 50%;
+          animation: spin 20s linear infinite;
+        "></div>
+        <div style="
+          width: 110px;
+          height: 110px;
+          border-radius: 50%;
+          background: linear-gradient(145deg, rgba(0,255,220,0.15), rgba(120,0,255,0.15));
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(0, 255, 220, 0.3);
+          box-shadow: 0 10px 40px rgba(0, 255, 220, 0.2), inset 0 0 20px rgba(255,255,255,0.05);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        ">
+          <img src="images/school-badge.png" alt="BCK school badge" style="width: 75px; height: 75px; object-fit: contain; border-radius: 50%; filter: drop-shadow(0 0 10px rgba(0,255,220,0.6));">
+        </div>
+      </div>
+
+      <p style="
+        margin: 0 0 12px;
+        font-family: 'Orbitron', monospace;
+        font-size: 12px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #00ffd0;
+        text-shadow: 0 0 12px rgba(0,255,220,0.7);
+      ">ICT Club × Prefectorial Education Department</p>
+
+      <h1 style="
+        margin: 0 0 16px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: clamp(2.2rem, 6vw, 4.5rem);
+        font-weight: 900;
+        letter-spacing: -1px;
+        background: linear-gradient(120deg, #ffffff 0%, #00ffd0 35%, #9d4edd 65%, #00b4ff 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: holoShimmer 6s linear infinite;
+        text-shadow: 0 0 60px rgba(0,255,220,0.2);
+      ">About the project</h1>
+
+      <p style="
+        margin: 0 auto;
+        max-width: 500px;
+        font-size: 1.1rem;
+        color: rgba(232, 241, 255, 0.7);
+        font-weight: 300;
+      ">Building better access to learning at BCK.</p>
     </div>
-    <nav class="navbar container" aria-label="Main navigation">
-      <a href="index.html">Home</a>
-      <a href="books.html">Digital Library</a>
-      <a class="active" href="about.html">About</a>
-    </nav>
   </header>
 
-  <main class="container about-main">
-    <section class="about-hero glass">
-      <div class="about-icon" aria-hidden="true">✦</div>
+  <!-- ============ MAIN ============ -->
+  <main style="
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 20px 60px;
+    perspective: 1500px;
+  ">
+
+    <!-- HERO PURPOSE SECTION -->
+    <section style="
+      position: relative;
+      padding: 48px 40px;
+      margin-bottom: 50px;
+      background: linear-gradient(135deg, rgba(20, 25, 50, 0.55), rgba(40, 15, 60, 0.55));
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 28px;
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+      transform: rotateX(2deg);
+      transition: transform 0.5s cubic-bezier(.2,.9,.3,1.3);
+    " onmouseover="this.style.transform='rotateX(0deg) translateY(-4px)'" onmouseout="this.style.transform='rotateX(2deg)'">
+      <div style="
+        font-size: 5rem;
+        background: linear-gradient(135deg, #00ffd0, #9d4edd);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 25px rgba(0,255,220,0.5));
+        animation: floaty 4s ease-in-out infinite;
+        flex-shrink: 0;
+      ">✦</div>
       <div>
-        <span class="chip">OUR PURPOSE</span>
-        <h2>Knowledge should be within reach.</h2>
-        <p>The BCK Digital Library is a student-led initiative created to provide easily accessible, rich study materials to students of Bishop Cipriano Kihangire Senior Secondary School Day Section. It is designed to support productive use of gadgets during holidays, free time, and independent study.</p>
+        <span style="
+          display: inline-block;
+          padding: 6px 14px;
+          background: rgba(0,255,220,0.1);
+          border: 1px solid rgba(0,255,220,0.4);
+          border-radius: 20px;
+          font-family: 'Orbitron', sans-serif;
+          font-size: 11px;
+          letter-spacing: 2px;
+          color: #00ffd0;
+          margin-bottom: 14px;
+          text-shadow: 0 0 8px rgba(0,255,220,0.5);
+        ">OUR PURPOSE</span>
+        <h2 style="
+          margin: 0 0 14px;
+          font-family: 'Orbitron', sans-serif;
+          font-size: clamp(1.6rem, 4vw, 2.3rem);
+          font-weight: 700;
+          color: #fff;
+        ">Knowledge should be within reach.</h2>
+        <p style="
+          margin: 0;
+          color: rgba(232,241,255,0.8);
+          font-size: 1.05rem;
+        ">The BCK Digital Library is a student-led initiative created to provide easily accessible, rich study materials to students of Bishop Cipriano Kihangire Senior Secondary School Day Section. It is designed to support productive use of gadgets during holidays, free time, and independent study.</p>
       </div>
     </section>
 
-    <section class="about-section">
-      <div class="section-heading about-heading">
-        <div><span class="chip">THE VISION</span><h2>From gadgets to growth</h2></div>
+    <!-- VISION SECTION -->
+    <section style="margin-bottom: 60px;">
+      <div style="margin-bottom: 30px;">
+        <span style="
+          display: inline-block;
+          padding: 6px 14px;
+          background: rgba(157,78,221,0.12);
+          border: 1px solid rgba(157,78,221,0.45);
+          border-radius: 20px;
+          font-family: 'Orbitron', sans-serif;
+          font-size: 11px;
+          letter-spacing: 2px;
+          color: #c77dff;
+          margin-bottom: 12px;
+          text-shadow: 0 0 8px rgba(157,78,221,0.5);
+        ">THE VISION</span>
+        <h2 style="
+          margin: 0;
+          font-family: 'Orbitron', sans-serif;
+          font-size: clamp(1.8rem, 4vw, 2.6rem);
+          font-weight: 700;
+          background: linear-gradient(90deg, #fff, #c77dff);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        ">From gadgets to growth</h2>
       </div>
-      <div class="vision-grid">
-        <article class="vision-card glass"><span class="vision-number">01</span><h3>Access</h3><p>Connect students with approved notes, revision resources, past papers, and other learning materials wherever they are.</p></article>
-        <article class="vision-card glass"><span class="vision-number">02</span><h3>Productivity</h3><p>Encourage students to use phones and other gadgets purposefully for learning, revision, and personal development.</p></article>
-        <article class="vision-card glass"><span class="vision-number">03</span><h3>Collaboration</h3><p>Bring together the creativity of the ICT Club and the academic support of the Prefectorial Education Department.</p></article>
+
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+      ">
+        <!-- Card 1 -->
+        <article style="
+          position: relative;
+          padding: 32px 28px;
+          background: linear-gradient(145deg, rgba(0,255,220,0.08), rgba(10,15,30,0.4));
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(0,255,220,0.2);
+          border-radius: 22px;
+          transform-style: preserve-3d;
+          transform: perspective(1000px) rotateY(-4deg);
+          transition: all 0.5s cubic-bezier(.2,.9,.3,1.3);
+          box-shadow: 0 20px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+          overflow: hidden;
+        " onmouseover="this.style.transform='perspective(1000px) rotateY(0deg) translateY(-8px)'; this.style.boxShadow='0 25px 60px rgba(0,255,220,0.3), inset 0 1px 0 rgba(255,255,255,0.15)'" onmouseout="this.style.transform='perspective(1000px) rotateY(-4deg)'; this.style.boxShadow='0 20px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08)'">
+          <span style="
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00ffd0, transparent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            display: block;
+            margin-bottom: 10px;
+          ">01</span>
+          <h3 style="
+            margin: 0 0 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: #fff;
+          ">Access</h3>
+          <p style="margin: 0; color: rgba(232,241,255,0.78);">Connect students with approved notes, revision resources, past papers, and other learning materials wherever they are.</p>
+          <div style="
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,255,220,0.4), transparent 70%);
+            filter: blur(20px);
+          "></div>
+        </article>
+
+        <!-- Card 2 -->
+        <article style="
+          position: relative;
+          padding: 32px 28px;
+          background: linear-gradient(145deg, rgba(157,78,221,0.1), rgba(10,15,30,0.4));
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(157,78,221,0.25);
+          border-radius: 22px;
+          transform-style: preserve-3d;
+          transform: perspective(1000px) rotateY(0deg) translateY(10px);
+          transition: all 0.5s cubic-bezier(.2,.9,.3,1.3);
+          box-shadow: 0 20px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+          overflow: hidden;
+        " onmouseover="this.style.transform='perspective(1000px) rotateY(0deg) translateY(-8px)'; this.style.boxShadow='0 25px 60px rgba(157,78,221,0.3), inset 0 1px 0 rgba(255,255,255,0.15)'" onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) translateY(10px)'; this.style.boxShadow='0 20px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08)'">
+          <span style="
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #c77dff, transparent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            display: block;
+            margin-bottom: 10px;
+          ">02</span>
+          <h3 style="
+            margin: 0 0 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: #fff;
+          ">Productivity</h3>
+          <p style="margin: 0; color: rgba(232,241,255,0.78);">Encourage students to use phones and other gadgets purposefully for learning, revision, and personal development.</p>
+          <div style="
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(157,78,221,0.4), transparent 70%);
+            filter: blur(20px);
+          "></div>
+        </article>
+
+        <!-- Card 3 -->
+        <article style="
+          position: relative;
+          padding: 32px 28px;
+          background: linear-gradient(145deg, rgba(0,180,255,0.08), rgba(10,15,30,0.4));
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(0,180,255,0.25);
+          border-radius: 22px;
+          transform-style: preserve-3d;
+          transform: perspective(1000px) rotateY(4deg);
+          transition: all 0.5s cubic-bezier(.2,.9,.3,1.3);
+          box-shadow: 0 20px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+          overflow: hidden;
+        " onmouseover="this.style.transform='perspective(1000px) rotateY(0deg) translateY(-8px)'; this.style.boxShadow='0 25px 60px rgba(0,180,255,0.3), inset 0 1px 0 rgba(255,255,255,0.15)'" onmouseout="this.style.transform='perspective(1000px) rotateY(4deg)'; this.style.boxShadow='0 20px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08)'">
+          <span style="
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00b4ff, transparent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            display: block;
+            margin-bottom: 10px;
+          ">03</span>
+          <h3 style="
+            margin: 0 0 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: #fff;
+          ">Collaboration</h3>
+          <p style="margin: 0; color: rgba(232,241,255,0.78);">Bring together the creativity of the ICT Club and the academic support of the Prefectorial Education Department.</p>
+          <div style="
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,180,255,0.4), transparent 70%);
+            filter: blur(20px);
+          "></div>
+        </article>
       </div>
     </section>
 
-    <section class="about-section">
-      <div class="section-heading about-heading"><div><span class="chip">THE TEAM</span><h2>Student leadership</h2></div></div>
-      <div class="team-grid">
-        <article class="person-card glass featured-person"><div class="person-avatar">NJ</div><div><span class="role-label">ICT CLUB PRESIDENT</span><h3>Namono Jorydin</h3><p>Club President · ICT Club</p></div></article>
-        <article class="person-card glass featured-person"><div class="person-avatar">AE</div><div><span class="role-label">VICE PRESIDENT & CHIEF DEVELOPER</span><h3>Ainembabazi Edward Francis</h3><p>Vice President · ICT Club</p></div></article>
+    <!-- TEAM SECTION -->
+    <section style="margin-bottom: 60px;">
+      <div style="margin-bottom: 30px;">
+        <span style="
+          display: inline-block;
+          padding: 6px 14px;
+          background: rgba(0,180,255,0.12);
+          border: 1px solid rgba(0,180,255,0.45);
+          border-radius: 20px;
+          font-family: 'Orbitron', sans-serif;
+          font-size: 11px;
+          letter-spacing: 2px;
+          color: #5ee0ff;
+          margin-bottom: 12px;
+          text-shadow: 0 0 8px rgba(0,180,255,0.5);
+        ">THE TEAM</span>
+        <h2 style="
+          margin: 0;
+          font-family: 'Orbitron', sans-serif;
+          font-size: clamp(1.8rem, 4vw, 2.6rem);
+          font-weight: 700;
+          background: linear-gradient(90deg, #fff, #5ee0ff);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        ">Student leadership</h2>
+      </div>
+
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+      ">
+        <!-- 1. Edward (Chief Dev) -->
+        <article style="
+          position: relative;
+          padding: 32px;
+          background: linear-gradient(135deg, rgba(255,0,180,0.1), rgba(157,78,221,0.15), rgba(0,180,255,0.1));
+          backdrop-filter: blur(25px);
+          -webkit-backdrop-filter: blur(25px);
+          border: 1px solid rgba(255,255,255,0.2);
+          border-radius: 24px;
+          display: flex;
+          gap: 20px;
+          align-items: center;
+          transform-style: preserve-3d;
+          transition: all 0.4s cubic-bezier(.2,.9,.3,1.3);
+          box-shadow: 0 15px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+          animation: pulseGlow 4s ease-in-out infinite;
+        " onmouseover="this.style.transform='translateY(-6px) rotateX(-5deg)'; this.style.boxShadow='0 25px 60px rgba(255,0,180,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.4)'">
+          <div style="
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 9px;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ff00cc, #00ffd0);
+            padding: 4px 10px;
+            border-radius: 20px;
+            color: #05070f;
+            font-weight: 700;
+          ">⭐ CHIEF DEV</div>
+          <div style="
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #ff00cc, #9d4edd, #00ffd0);
+            background-size: 200% 200%;
+            animation: auroraShift 4s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.6rem;
+            color: #fff;
+            box-shadow: 0 0 30px rgba(255,0,180,0.5), inset 0 2px 0 rgba(255,255,255,0.3);
+            flex-shrink: 0;
+          ">AE</div>
+          <div>
+            <span style="
+              font-family: 'Orbitron', sans-serif;
+              font-size: 10px;
+              letter-spacing: 2px;
+              background: linear-gradient(90deg, #ff00cc, #00ffd0);
+              -webkit-background-clip: text;
+              background-clip: text;
+              -webkit-text-fill-color: transparent;
+              font-weight: 700;
+            ">VICE PRESIDENT & CHIEF DEVELOPER</span>
+            <h3 style="margin: 6px 0 4px; font-family: 'Orbitron', sans-serif; font-size: 1.3rem; color: #fff;">Ainembabazi Edward Francis</h3>
+            <p style="margin: 0; color: rgba(232,241,255,0.7); font-size: 0.95rem;">Vice President · ICT Club</p>
+          </div>
+        </article>
+
+        <!-- 2. Mataa Victor -->
+        <article style="
+          position: relative;
+          padding: 32px;
+          background: linear-gradient(135deg, rgba(0,180,255,0.08), rgba(10,15,30,0.5));
+          backdrop-filter: blur(25px);
+          -webkit-backdrop-filter: blur(25px);
+          border: 1px solid rgba(0,180,255,0.3);
+          border-radius: 24px;
+          display: flex;
+          gap: 20px;
+          align-items: center;
+          transform-style: preserve-3d;
+          transition: all 0.4s cubic-bezier(.2,.9,.3,1.3);
+          box-shadow: 0 15px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+        " onmouseover="this.style.transform='translateY(-6px) rotateX(-5deg)'; this.style.boxShadow='0 25px 60px rgba(0,180,255,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.4)'">
+          <div style="
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #00b4ff, #0077ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.6rem;
+            color: #fff;
+            box-shadow: 0 0 25px rgba(0,180,255,0.3), inset 0 2px 0 rgba(255,255,255,0.2);
+            flex-shrink: 0;
+          ">MV</div>
+          <div>
+            <span style="
+              font-family: 'Orbitron', sans-serif;
+              font-size: 10px;
+              letter-spacing: 2px;
+              color: #5ee0ff;
+            ">ASSISTANT CHIEF DEVELOPER</span>
+            <h3 style="margin: 6px 0 4px; font-family: 'Orbitron', sans-serif; font-size: 1.3rem; color: #fff;">Mataa Victor</h3>
+            <p style="margin: 0; color: rgba(232,241,255,0.6); font-size: 0.95rem;">Assistant Chief Developer · ICT Club</p>
+          </div>
+        </article>
+
+        <!-- 3. Namono -->
+        <article style="
+          padding: 32px;
+          background: linear-gradient(135deg, rgba(157,78,221,0.08), rgba(20,10,40,0.5));
+          backdrop-filter: blur(25px);
+          -webkit-backdrop-filter: blur(25px);
+          border: 1px solid rgba(157,78,221,0.3);
+          border-radius: 24px;
+          display: flex;
+          gap: 20px;
+          align-items: center;
+          transform-style: preserve-3d;
+          transition: all 0.4s cubic-bezier(.2,.9,.3,1.3);
+          box-shadow: 0 15px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+        " onmouseover="this.style.transform='translateY(-6px) rotateX(-5deg)'; this.style.boxShadow='0 25px 60px rgba(157,78,221,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.4)'">
+          <div style="
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #9d4edd, #7700ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.6rem;
+            color: #fff;
+            box-shadow: 0 0 25px rgba(157,78,221,0.3), inset 0 2px 0 rgba(255,255,255,0.2);
+            flex-shrink: 0;
+          ">NJ</div>
+          <div>
+            <span style="
+              font-family: 'Orbitron', sans-serif;
+              font-size: 10px;
+              letter-spacing: 2px;
+              color: #c77dff;
+            ">ICT CLUB PRESIDENT</span>
+            <h3 style="margin: 6px 0 4px; font-family: 'Orbitron', sans-serif; font-size: 1.3rem; color: #fff;">Namono Jorydin</h3>
+            <p style="margin: 0; color: rgba(232,241,255,0.6); font-size: 0.95rem;">Club President · ICT Club</p>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section class="about-section">
-      <div class="section-heading about-heading"><div><span class="chip">IN COLLABORATION WITH</span><h2>Prefectorial Education Department</h2></div></div>
-      <div class="leadership-panel glass">
-        <div class="department-mark">PED</div>
-        <div class="leadership-list">
-          <div><span>EDUCATION MINISTER</span><strong>Nagalemede Peace</strong></div>
-          <div><span>ASSISTANT EDUCATION MINISTER · CHIEF DEVELOPER</span><strong>Ainembabazi Edward Francis</strong></div>
+    <!-- PED SECTION -->
+    <section style="margin-bottom: 60px;">
+      <div style="margin-bottom: 30px;">
+        <span style="
+          display: inline-block;
+          padding: 6px 14px;
+          background: rgba(255,0,180,0.1);
+          border: 1px solid rgba(255,0,180,0.4);
+          border-radius: 20px;
+          font-family: 'Orbitron', sans-serif;
+          font-size: 11px;
+          letter-spacing: 2px;
+          color: #ff5ecb;
+          margin-bottom: 12px;
+          text-shadow: 0 0 8px rgba(255,0,180,0.5);
+        ">IN COLLABORATION WITH</span>
+        <h2 style="
+          margin: 0;
+          font-family: 'Orbitron', sans-serif;
+          font-size: clamp(1.6rem, 4vw, 2.3rem);
+          font-weight: 700;
+          background: linear-gradient(90deg, #fff, #ff5ecb);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        ">Prefectorial Education Department</h2>
+      </div>
+
+      <div style="
+        padding: 40px;
+        background: linear-gradient(135deg, rgba(255,0,180,0.08), rgba(20,10,40,0.5));
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 24px;
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        transform: perspective(1000px) rotateY(-3deg);
+        transition: transform 0.5s;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        flex-wrap: wrap;
+      " onmouseover="this.style.transform='perspective(1000px) rotateY(0deg)'" onmouseout="this.style.transform='perspective(1000px) rotateY(-3deg)'">
+        <div style="
+          font-family: 'Orbitron', sans-serif;
+          font-size: 2.5rem;
+          font-weight: 900;
+          background: linear-gradient(135deg, #ff00cc, #9d4edd);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          filter: drop-shadow(0 0 15px rgba(255,0,180,0.4));
+          letter-spacing: 2px;
+          flex-shrink: 0;
+        ">PED</div>
+        <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: rgba(255,255,255,0.04); border-left: 3px solid #00ffd0; border-radius: 8px;">
+            <span style="font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: 2px; color: #5ee0ff;">ASSISTANT EDUCATION MINISTER · CHIEF DEVELOPER</span>
+            <strong style="color: #fff; font-family: 'Orbitron', sans-serif;">Ainembabazi Edward Francis</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: rgba(255,255,255,0.04); border-left: 3px solid #ff00cc; border-radius: 8px;">
+            <span style="font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: 2px; color: #ff5ecb;">EDUCATION MINISTER</span>
+            <strong style="color: #fff; font-family: 'Orbitron', sans-serif;">Nagalemede Peace</strong>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="contact-panel glass">
-      <div>
-        <span class="chip">CONTACT THE CHIEF DEVELOPER</span>
-        <h2>Have a suggestion or resource?</h2>
-        <p>For feedback about the website, approved study materials, or technical issues, contact the Chief Developer directly.</p>
+    <!-- CONTACT PANEL -->
+    <section style="
+      padding: 48px 40px;
+      background: linear-gradient(135deg, rgba(0,255,220,0.08), rgba(157,78,221,0.12), rgba(0,180,255,0.08));
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 28px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    ">
+      <div style="
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(0,255,220,0.25), transparent 70%);
+        filter: blur(30px);
+      "></div>
+      <div style="
+        position: absolute;
+        bottom: -60px;
+        left: -60px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(157,78,221,0.25), transparent 70%);
+        filter: blur(30px);
+      "></div>
+
+      <div style="position: relative;">
+        <span style="
+          display: inline-block;
+          padding: 6px 14px;
+          background: rgba(0,255,220,0.12);
+          border: 1px solid rgba(0,255,220,0.45);
+          border-radius: 20px;
+          font-family: 'Orbitron', sans-serif;
+          font-size: 11px;
+          letter-spacing: 2px;
+          color: #00ffd0;
+          margin-bottom: 12px;
+          text-shadow: 0 0 8px rgba(0,255,220,0.5);
+        ">CONTACT THE CHIEF DEVELOPER</span>
+
+        <h2 style="
+          margin: 0 0 14px;
+          font-family: 'Orbitron', sans-serif;
+          font-size: clamp(1.6rem, 4vw, 2.3rem);
+          font-weight: 700;
+          color: #fff;
+        ">Have a suggestion or resource?</h2>
+        <p style="margin: 0 0 30px; color: rgba(232,241,255,0.8); max-width: 600px;">For feedback about the website, approved study materials, or technical issues, contact the Chief Developer directly.</p>
+
+        <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 30px;">
+          <a href="https://wa.me/256741219802" target="_blank" rel="noopener" style="
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 26px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 14px;
+            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(37,211,102,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+            transition: all 0.3s;
+          " onmouseover="this.style.transform='translateY(-3px) scale(1.03)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
+            <span style="font-size: 1.2rem;">◉</span> WHATSAPP
+          </a>
+          <a href="mailto:edwardfrancis007242002@gmail.com" style="
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 26px;
+            background: linear-gradient(135deg, #00ffd0, #00b4ff);
+            color: #05070f;
+            text-decoration: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(0,255,220,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+            transition: all 0.3s;
+          " onmouseover="this.style.transform='translateY(-3px) scale(1.03)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
+            <span style="font-size: 1.2rem;">✉</span> EMAIL
+          </a>
+        </div>
+
+        <div style="
+          display: flex;
+          gap: 24px;
+          flex-wrap: wrap;
+          padding: 20px;
+          background: rgba(5,7,15,0.5);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 14px;
+          backdrop-filter: blur(10px);
+        ">
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: 2px; color: #00ffd0;">DEVELOPER</span>
+            <strong style="color: #fff; font-size: 1.05rem;">Ainembabazi Edward Francis</strong>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: 2px; color: #c77dff;">PHONE</span>
+            <strong style="color: #fff; font-size: 1.05rem;">+256 741 219 802</strong>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <span style="font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: 2px; color: #5ee0ff;">EMAIL</span>
+            <strong style="color: #fff; font-size: 1.05rem; word-break: break-all;">edwardfrancis007242002@gmail.com</strong>
+          </div>
+        </div>
       </div>
-      <div class="contact-actions">
-        <a class="contact-button whatsapp" href="https://wa.me/256741219802" target="_blank" rel="noopener"><span>◉</span> WhatsApp</a>
-        <a class="contact-button email" href="mailto:edwardfrancis007242002@gmail.com"><span>✉</span> Email</a>
-      </div>
-      <div class="contact-details"><strong>Ainembabazi Edward Francis</strong><span>+256 741 219 802</span><span>edwardfrancis007242002@gmail.com</span></div>
     </section>
 
-    <p class="about-note">This initiative is intended for educational and productive use by the BCK SSS Day Section community. Resources should be shared responsibly and with the necessary school permissions.</p>
+    <!-- Educational Technology Upgrade Banner -->
+    <div style="
+      text-align: center;
+      margin: 60px auto 40px;
+      padding: 50px 20px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(0,255,220,0.05), rgba(157,78,221,0.05));
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 30px;
+      max-width: 900px;
+    ">
+      <div style="position: absolute; top: 50%; left: 50%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(0,255,220,0.15), transparent 70%); transform: translate(-50%, -50%); filter: blur(40px); pointer-events: none;"></div>
+      <span style="font-family: 'Orbitron', sans-serif; font-size: 12px; letter-spacing: 4px; color: #00ffd0; text-shadow: 0 0 10px rgba(0,255,220,0.5);">SYSTEM STATUS</span>
+      <h2 style="
+        margin: 15px 0 0;
+        font-family: 'Orbitron', sans-serif;
+        font-size: clamp(1.8rem, 5vw, 3rem);
+        font-weight: 900;
+        letter-spacing: 1px;
+        background: linear-gradient(90deg, #00ffd0, #ff00cc, #00b4ff);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: holoShimmer 5s linear infinite;
+      ">EDUCATIONAL TECHNOLOGY UPGRADE</h2>
+    </div>
   </main>
 
-  <footer class="site-footer container">BCK Digital Library · ICT Club and Prefectorial Education Department</footer>
+  <footer style="
+    text-align: center;
+    padding: 30px 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(232,241,255,0.5);
+    border-top: 1px solid rgba(255,255,255,0.05);
+  ">
+    BCK DIGITAL LIBRARY · ICT CLUB & PREFECTORIAL EDUCATION DEPARTMENT<br>
+    <span style="margin-top: 10px; display: inline-block; color: #00ffd0; text-shadow: 0 0 8px rgba(0,255,220,0.4);">© 2026 FAE. ALL RIGHTS RESERVED.</span>
+  </footer>
+
 </body>
 </html>
