@@ -1,0 +1,10 @@
+{
+  "name": "BCK Digital Library",
+  "short_name": "BCK Library",
+  "description": "Approved learning resources for BCK Senior Secondary School Day Section.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0a0d14",
+  "theme_color": "#c8ff3d",
+  "icons": [{"src":"logo.svg","sizes":"any","type":"image/svg","purpose":"any maskable"}]
+}
