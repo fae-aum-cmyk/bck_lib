@@ -3,60 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="BCK Digital Library – approved learning resources for students.">
-  <title>BCK Digital Library</title>
+  <meta name="description" content="BCK Digital Library — approved learning resources for students of Bishop Cipriano Kihangire Senior Secondary School Day Section.">
+  <meta name="theme-color" content="#0a0d14">
+  <title>BCK Digital Library · Learn. Explore. Achieve.</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="logo.svg">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" type="image/png" href="images/badge.png">
 </head>
 <body>
+  <div class="ambient ambient-a" aria-hidden="true"></div><div class="ambient ambient-b" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div>
   <header class="site-header">
-    <div class="hero container">
-      <div class="badge-box"><img src="images/badge.png" alt="BCK school badge"></div>
-      <p class="eyebrow">Prefectorial Education Department · ICT Club</p>
-      <h1>BCK Digital Library</h1>
-      <p class="tagline">A simple home for approved learning resources.</p>
-    </div>
-    <nav class="navbar container" aria-label="Main navigation">
-      <a class="active" href="index.html">Home</a>
-      <a href="books.html">Digital Library</a>
-      <a href="about.html">About</a>
-    </nav>
+    <a class="brand" href="index.html" data-action="home" aria-label="BCK Digital Library home"><span class="brand-mark brand-badge"><img src="logo.svg" alt="BCK school badge"></span><span><strong>BCK<span>Library</span></strong><small>Library · Day Section</small></span></a>
+    <div class="header-search"><span class="search-symbol">⌕</span><input id="global-search" type="search" placeholder="Search resources, subjects or files…" autocomplete="off" aria-label="Search the library"><kbd>/</kbd><div id="search-results" class="search-results" hidden></div></div>
+    <nav class="main-nav" aria-label="Main navigation"><button class="nav-link is-active" data-action="home">Home</button><button class="nav-link study-nav" data-action="study-space"><span class="study-icon">✦</span><span class="study-label">Study Space</span></button></nav>
+    <div class="header-meta"><button class="nav-link about-nav" data-action="about">About</button></div>
   </header>
 
-  <main class="container">
-    <section class="welcome-panel glass">
-      <div>
-        <span class="chip">WELCOME</span>
-        <h2>Learn. Explore. Achieve.</h2>
-        <p>Find notes, revision materials, past papers, and other school-approved resources organised by class.</p>
-        <a class="btn-gold" href="books.html">Enter the Library</a>
-      </div>
-      <div class="welcome-mark" aria-hidden="true">📚</div>
+  <main id="app">
+    <section id="home-view" class="view home-view" aria-labelledby="home-title">
+      <div class="home-hero"><div class="hero-copy"><p class="kicker"><span></span> Bishop Cipriano Kihangire SSS · Day Section</p><h1 id="home-title">Learn.<br><em>Explore.</em><br>Achieve.</h1><p class="hero-text">A focused digital home for approved notes, revision materials and past papers — organised around the way you actually study.</p><div class="hero-actions"><button class="primary-button" data-scroll="classes">Enter the library <b>↘</b></button><button class="quiet-button" data-action="about">Meet the project <span>→</span></button></div><div class="hero-footnote"><span class="avatar"><img src="logo.svg" alt="BCK school badge"></span><span><strong>Built for the BCK community</strong><small>Purposeful gadget use. Better access to learning.</small></span></div></div><div class="hero-art" aria-hidden="true"><div class="art-ring ring-1"></div><div class="art-ring ring-2"></div><div class="art-grid"></div><div class="art-card card-back"><span>STUDY<br>SMART</span><b>06</b></div><div class="art-card card-front"><small>BCK / DIGITAL LIBRARY</small><strong>YOUR<br><i>STUDY</i><br>ORBIT</strong><b>S1—S6</b></div><div class="art-sticker sticker-a">OPEN A<br>SHELF ↗</div><div class="art-sticker sticker-b">NOTES<br>+ PAPERS</div><div class="art-dot dot-a"></div><div class="art-dot dot-b"></div></div></div>
+      <div class="metric-row"><div><b data-stat="resources">—</b><span>indexed resources</span></div><div><b data-stat="classes">06</b><span>classes online</span></div><div><b>02</b><span>student-led departments</span></div><div class="metric-note"><span class="live-dot"></span> Find your focus. Keep your momentum.</div></div>
+      <section id="classes" class="classes-section"><div class="section-top"><div><p class="kicker"><span></span> 01 / choose your class</p><h2>Start with<br><em>your year.</em></h2></div><p>Pick a class to open its subject map. Your resources stay one step away.</p></div><div id="class-grid" class="class-grid" aria-live="polite"><div class="loading-state">Opening the library<span>...</span></div></div></section>
+      <section class="project-note"><div class="note-mark">✦</div><div><p class="kicker">A student-led initiative</p><h3>From gadgets to growth.</h3><p>The library supports productive use of phones and other gadgets during holidays, free time and independent study.</p></div><button class="outline-button" data-action="about">About BCK Digital Library <span>↗</span></button></section>
     </section>
 
-    <section class="section-heading">
-      <div>
-        <span class="chip">S1–S6</span>
-        <h2>Choose your class</h2>
-      </div>
-      <p>Open a shelf to view its resources.</p>
-    </section>
-
-    <section class="class-grid" aria-label="Class libraries">
-      <a class="class-card glass" href="books.html#S1"><span>S1</span><small>O-Level</small><b>Open shelf →</b></a>
-      <a class="class-card glass" href="books.html#S2"><span>S2</span><small>O-Level</small><b>Open shelf →</b></a>
-      <a class="class-card glass" href="books.html#S3"><span>S3</span><small>O-Level</small><b>Open shelf →</b></a>
-      <a class="class-card glass" href="books.html#S4"><span>S4</span><small>O-Level</small><b>Open shelf →</b></a>
-      <a class="class-card glass" href="books.html#S5"><span>S5</span><small>A-Level</small><b>Open shelf →</b></a>
-      <a class="class-card glass" href="books.html#S6"><span>S6</span><small>A-Level</small><b>Open shelf →</b></a>
-    </section>
-
-    <section class="notice glass">
-      <strong>For students</strong>
-      <p>Use the search box in the library, choose your class, and select <b>Open resource</b>. Resources open from the school’s approved Google Drive.</p>
-    </section>
+    <section id="class-view" class="view inner-view is-hidden" aria-labelledby="class-title"></section>
+    <section id="about-view" class="view inner-view is-hidden" aria-labelledby="about-title"></section>
   </main>
 
-  <footer class="site-footer container">BCK Digital Library · Built for learning</footer>
+  <div id="study-modal" class="modal study-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="study-title"><div class="modal-backdrop" data-action="close-study"></div><div class="study-panel"><div class="study-panel-head"><div><p class="kicker"><span></span> Personalise your shelf</p><h2 id="study-title">Build your<br><em>Study Space.</em></h2><p>Choose one class and the subjects you want to keep in view. Your setup stays on this device.</p></div><button class="close-button" data-action="close-study" aria-label="Close Study Space">×</button></div><div class="study-form"><label class="study-label">Your class<select id="study-class"></select></label><div class="study-subject-head"><span class="study-label">Your subjects</span><span id="study-subject-count" class="study-count">0 selected</span></div><div id="study-subjects" class="study-subjects"></div><div class="study-actions"><button class="outline-button" data-action="reset-study">Clear setup</button><button class="primary-button" data-action="save-study">Save Study Space <span>↗</span></button></div></div></div></div>
+
+  <div id="reader-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="reader-title"><div class="modal-backdrop" data-action="close-reader"></div><div class="modal-panel"><div class="modal-header"><div><p class="kicker"><span></span> Resource viewer</p><h2 id="reader-title">Opening resource…</h2><p id="reader-meta" class="modal-meta"></p></div><button class="close-button" data-action="close-reader" aria-label="Close viewer">×</button></div><div class="reader-wrap"><div class="reader-loading">Loading the preview<span>...</span></div><iframe id="reader-frame" title="Resource preview" loading="lazy" referrerpolicy="no-referrer"></iframe></div><div class="modal-footer"><p>If a publisher blocks embedded viewing, use the original link below.</p><a id="reader-download" class="primary-button" href="#" target="_blank" rel="noopener" download>Open original <span>↗</span></a></div></div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
 </body>
 </html>
