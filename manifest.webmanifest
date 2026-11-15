@@ -1,10 +1,24 @@
 {
   "name": "BCK Digital Library",
   "short_name": "BCK Library",
-  "description": "Approved learning resources for BCK Senior Secondary School Day Section.",
+  "description": "Approved notes, past papers and revision materials for Bishop Cipriano Kihangire SSS (Day Section).",
   "start_url": "index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#0a0d14",
-  "theme_color": "#c8ff3d",
-  "icons": [{"src":"logo.svg","sizes":"any","type":"image/svg","purpose":"any maskable"}]
+  "background_color": "#ffffff",
+  "theme_color": "#2B5D3A",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "school-badge.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }

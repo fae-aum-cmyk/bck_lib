@@ -1,40 +1,153 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="BCK Digital Library — approved learning resources for students of Bishop Cipriano Kihangire Senior Secondary School Day Section.">
-  <meta name="theme-color" content="#0a0d14">
-  <title>BCK Digital Library · Learn. Explore. Achieve.</title>
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="school-badge.png">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="ambient ambient-a" aria-hidden="true"></div><div class="ambient ambient-b" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div>
-  <header class="site-header">
-    <a class="brand" href="index.html" data-action="home" aria-label="BCK Digital Library home"><span class="brand-mark brand-badge"><img src="logo.svg" alt="BCK school badge"></span><span><strong>BCK<span>Library</span></strong><small>Library · Day Section</small></span></a>
-    <div class="header-search"><span class="search-symbol">⌕</span><input id="global-search" type="search" placeholder="Search resources, subjects or files…" autocomplete="off" aria-label="Search the library"><kbd>/</kbd><div id="search-results" class="search-results" hidden></div></div>
-    <nav class="main-nav" aria-label="Main navigation"><button class="nav-link is-active" data-action="home">Home</button><button class="nav-link study-nav" data-action="study-space"><span class="study-icon">✦</span><span class="study-label">Study Space</span></button></nav>
-    <div class="header-meta"><button class="nav-link about-nav" data-action="about">About</button></div>
-  </header>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#2B5D3A" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0d14" media="(prefers-color-scheme: dark)" />
+    <meta name="description" content="BCK Digital Library — 13,000+ approved notes, past papers and revision materials for Bishop Cipriano Kihangire SSS (Day Section). Read, highlight, search and learn." />
+    <meta name="keywords" content="BCK, library, Bishop Cipriano Kihangire, Uganda, UCE, UACE, past papers, notes, study" />
+    <meta name="author" content="BCK Library Team" />
 
-  <main id="app">
-    <section id="home-view" class="view home-view" aria-labelledby="home-title">
-      <div class="home-hero"><div class="hero-copy"><p class="kicker"><span></span> Bishop Cipriano Kihangire SSS · Day Section</p><h1 id="home-title">Learn.<br><em>Explore.</em><br>Achieve.</h1><p class="hero-text">A focused digital home for approved notes, revision materials and past papers — organised around the way you actually study.</p><div class="hero-actions"><button class="primary-button" data-scroll="classes">Enter the library <b>↘</b></button><button class="quiet-button" data-action="about">Meet the project <span>→</span></button></div><div class="hero-footnote"><span class="avatar"><img src="logo.svg" alt="BCK school badge"></span><span><strong>Built for the BCK community</strong><small>Purposeful gadget use. Better access to learning.</small></span></div></div><div class="hero-art" aria-hidden="true"><div class="art-ring ring-1"></div><div class="art-ring ring-2"></div><div class="art-grid"></div><div class="art-card card-back"><span>STUDY<br>SMART</span><b>06</b></div><div class="art-card card-front"><small>BCK / DIGITAL LIBRARY</small><strong>YOUR<br><i>STUDY</i><br>ORBIT</strong><b>S1—S6</b></div><div class="art-sticker sticker-a">OPEN A<br>SHELF ↗</div><div class="art-sticker sticker-b">NOTES<br>+ PAPERS</div><div class="art-dot dot-a"></div><div class="art-dot dot-b"></div></div></div>
-      <div class="metric-row"><div><b data-stat="resources">—</b><span>indexed resources</span></div><div><b data-stat="classes">06</b><span>classes online</span></div><div><b>02</b><span>student-led departments</span></div><div class="metric-note"><span class="live-dot"></span> Find your focus. Keep your momentum.</div></div>
-      <section id="classes" class="classes-section"><div class="section-top"><div><p class="kicker"><span></span> 01 / choose your class</p><h2>Start with<br><em>your year.</em></h2></div><p>Pick a class to open its subject map. Your resources stay one step away.</p></div><div id="class-grid" class="class-grid" aria-live="polite"><div class="loading-state">Opening the library<span>...</span></div></div></section>
-      <section class="project-note"><div class="note-mark">✦</div><div><p class="kicker">A student-led initiative</p><h3>From gadgets to growth.</h3><p>The library supports productive use of phones and other gadgets during holidays, free time and independent study.</p></div><button class="outline-button" data-action="about">About BCK Digital Library <span>↗</span></button></section>
-    </section>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="BCK Digital Library — Learn. Explore. Achieve." />
+    <meta property="og:description" content="13,000+ approved study resources, beautifully presented, with smart search and a community discussions board." />
+    <meta property="og:image" content="logo.svg" />
+    <meta property="og:url" content="https://bck-library.app" />
 
-    <section id="class-view" class="view inner-view is-hidden" aria-labelledby="class-title"></section>
-    <section id="about-view" class="view inner-view is-hidden" aria-labelledby="about-title"></section>
-  </main>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fresh-teacher.github.io" />
 
-  <div id="study-modal" class="modal study-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="study-title"><div class="modal-backdrop" data-action="close-study"></div><div class="study-panel"><div class="study-panel-head"><div><p class="kicker"><span></span> Personalise your shelf</p><h2 id="study-title">Build your<br><em>Study Space.</em></h2><p>Choose one class and the subjects you want to keep in view. Your setup stays on this device.</p></div><button class="close-button" data-action="close-study" aria-label="Close Study Space">×</button></div><div class="study-form"><label class="study-label">Your class<select id="study-class"></select></label><div class="study-subject-head"><span class="study-label">Your subjects</span><span id="study-subject-count" class="study-count">0 selected</span></div><div id="study-subjects" class="study-subjects"></div><div class="study-actions"><button class="outline-button" data-action="reset-study">Clear setup</button><button class="primary-button" data-action="save-study">Save Study Space <span>↗</span></button></div></div></div></div>
+    <title>BCK Digital Library · Learn. Explore. Achieve.</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app" class="app-shell">
+      <!-- ============ SIDEBAR ============ -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-head">
+          <a class="sidebar-brand" href="#/" data-link>
+            <span class="brand-mark"><img src="logo.svg" alt="BCK school badge" /></span>
+            <span class="brand-text">
+              <strong>BCK Library</strong>
+              <small>Day Section</small>
+            </span>
+          </a>
+          <button class="icon-btn sidebar-close" id="sidebar-close" aria-label="Close menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
+          </button>
+        </div>
 
-  <div id="reader-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="reader-title"><div class="modal-backdrop" data-action="close-reader"></div><div class="modal-panel"><div class="modal-header"><div><p class="kicker"><span></span> Resource viewer</p><h2 id="reader-title">Opening resource…</h2><p id="reader-meta" class="modal-meta"></p></div><button class="close-button" data-action="close-reader" aria-label="Close viewer">×</button></div><div class="reader-wrap"><div class="reader-loading">Loading the preview<span>...</span></div><iframe id="reader-frame" title="Resource preview" loading="lazy" referrerpolicy="no-referrer"></iframe></div><div class="modal-footer"><p>If a publisher blocks embedded viewing, use the original link below.</p><a id="reader-download" class="primary-button" href="#" target="_blank" rel="noopener" download>Open original <span>↗</span></a></div></div></div>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="app.js" defer></script>
-</body>
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <div class="nav-group">
+            <p class="nav-group-label">Library</p>
+            <ul class="nav-list">
+              <li><a class="nav-item" href="#/" data-link data-route="/"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg><span>Dashboard</span></a></li>
+              <li><a class="nav-item" href="#/library" data-link data-route="/library"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Library</span></a></li>
+              <li><a class="nav-item" href="#/class/s4" data-link data-route="/class/s4"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span>S4 — UCE Prep</span><span class="chip chip-hot">Hot</span></a></li>
+              <li><a class="nav-item" href="#/class/s6" data-link data-route="/class/s6"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span>S6 — UACE Prep</span><span class="chip chip-hot">Hot</span></a></li>
+              <li><a class="nav-item" href="#/assistant" data-link data-route="/assistant"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/><circle cx="12" cy="12" r="4"/></svg><span>Study Buddy</span><span class="chip chip-ai">AI</span></a></li>
+              <li><a class="nav-item" href="#/blog" data-link data-route="/blog"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Discussions</span></a></li>
+            </ul>
+          </div>
+
+          <div class="nav-group">
+            <p class="nav-group-label">You</p>
+            <ul class="nav-list">
+              <li><a class="nav-item" href="#/bookmarks" data-link data-route="/bookmarks"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span>Bookmarks</span></a></li>
+              <li><a class="nav-item" href="#/history" data-link data-route="/history"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg><span>Recently viewed</span></a></li>
+              <li><a class="nav-item" href="#/study-space" data-link data-route="/study-space"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg><span>Study Space</span></a></li>
+              <li><a class="nav-item" href="#/profile" data-link data-route="/profile"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile &amp; Settings</span></a></li>
+            </ul>
+          </div>
+        </nav>
+
+        <div class="sidebar-foot">
+          <div class="tip-card">
+            <strong>Tip of the day</strong>
+            <p>Use the highlight tool inside any PDF — selections open a focused Google search in a small window.</p>
+          </div>
+        </div>
+      </aside>
+      <div class="sidebar-scrim" id="sidebar-scrim" hidden></div>
+
+      <!-- ============ MAIN ============ -->
+      <div class="main-col">
+        <header class="topbar">
+          <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
+          </button>
+
+          <a class="topbar-brand" href="#/" data-link>
+            <span class="brand-mark"><img src="logo.svg" alt="BCK school badge" /></span>
+            <span class="brand-text">
+              <strong>BCK Library</strong>
+              <small>Day Section</small>
+            </span>
+          </a>
+
+          <div class="topbar-search">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="global-search" type="search" placeholder="Search 13,000+ resources…" autocomplete="off" aria-label="Search the library" />
+            <kbd class="search-kbd">/</kbd>
+            <div id="search-results" class="search-results" hidden></div>
+          </div>
+
+          <div class="topbar-actions">
+            <a class="ghost-btn" href="#/assistant" data-link><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/><circle cx="12" cy="12" r="4"/></svg><span>AI Buddy</span></a>
+            <span class="topbar-class" id="topbar-class" title="Your study class"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span>—</span></span>
+            <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
+              <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+              <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+            </button>
+            <span class="avatar-btn" id="avatar-btn" title="Profile">BC</span>
+          </div>
+        </header>
+
+        <main class="view-host" id="view-host" tabindex="-1">
+          <div class="view-loading" id="view-loading">
+            <div class="spinner" aria-hidden="true"></div>
+            <p>Loading the library…</p>
+          </div>
+        </main>
+
+        <footer class="app-foot">
+          <span>BCK Digital Library · 2026</span>
+          <span>Built with care by the BCK Library team.</span>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ============ READER MODAL ============ -->
+    <div class="modal" id="reader-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="reader-title">
+      <div class="modal-card">
+        <div class="modal-head">
+          <div>
+            <h3 id="reader-title">Resource</h3>
+            <p id="reader-meta" class="muted"></p>
+          </div>
+          <button class="icon-btn" data-close-modal="reader-modal" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="reader-desc" class="muted"></p>
+          <div class="modal-actions">
+            <a class="btn-primary" id="reader-open" href="#" target="_blank" rel="noopener">Open resource ↗</a>
+            <button class="btn-secondary" id="reader-bookmark">Save bookmark</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ TOAST ============ -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js" defer></script>
+  </body>
 </html>
